@@ -64,7 +64,7 @@ public:
 	Mac_ResData *Resource(const char *res_type, const char *name);
 
 	/* This returns a more detailed error message, or NULL */
-	char *Error(void) {
+	const char *Error(void) {
 		return(errstr);
 	}
 
@@ -92,7 +92,7 @@ protected:
 	Uint32  base;				/* The offset of the rsrc */
 
 	/* Useful for getting error feedback */
-	void error(char *fmt, ...) {
+	void error(const char *fmt, ...) {
 		va_list ap;
 
 		va_start(ap, fmt);
@@ -100,7 +100,7 @@ protected:
 		va_end(ap);
 		errstr = errbuf;
 	}
-	char *errstr;
+	const char *errstr;
 	char  errbuf[BUFSIZ];
 };
 

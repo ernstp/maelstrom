@@ -122,7 +122,7 @@ public:
 	int InvertText(SDL_Surface *text);
 
 	/* Returns NULL if everything is okay, or an error message if not */
-	char *Error(void) {
+	const char *Error(void) {
 		return(errstr);
 	}
 
@@ -131,7 +131,7 @@ private:
 	int text_allocated;
 
 	/* Useful for getting error feedback */
-	void SetError(char *fmt, ...) {
+	void SetError(const char *fmt, ...) {
 		va_list ap;
 
 		va_start(ap, fmt);
@@ -139,7 +139,7 @@ private:
 		va_end(ap);
 		errstr = errbuf;
 	}
-	char *errstr;
+	const char *errstr;
 	char  errbuf[BUFSIZ];
 };
 

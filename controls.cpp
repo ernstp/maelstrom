@@ -32,7 +32,8 @@ Uint8 gGammaCorrect = 3;
 /* Map a keycode to a key name */
 void KeyName(SDLKey keycode, char *namebuf)
 {
-	char *name, ch;
+	const char *name;
+	char ch;
 	int starting;
 
 	/* Get the name of the key */
@@ -67,10 +68,10 @@ void KeyName(SDLKey keycode, char *namebuf)
 	*namebuf = '\0';
 }
 
-static FILE *OpenData(char *mode, char **fname)
+static FILE *OpenData(const char *mode, char **fname)
 {
 	static char datafile[BUFSIZ];
-	char *home;
+	const char *home;
 	FILE *data;
 
 	if ( (home=getenv("HOME")) == NULL ) {
@@ -115,7 +116,8 @@ void LoadControls(void)
 
 void SaveControls(void)
 {
-	char  *datafile, *newmode;
+	char *datafile;
+	const char *newmode;
 	FILE *data;
 
 	/* Don't clobber existing joystick data */
@@ -153,7 +155,7 @@ void SaveControls(void)
 
 Controls newcontrols;
 static struct {
-	char *label;
+	const char *label;
 	int  yoffset;
 	SDLKey *control;
 } checkboxes[] = {
@@ -495,7 +497,7 @@ int DropEvents(void)
 
 void ShowDawn(void)
 {
-	static char *D_text[6] = {
+	static const char *D_text[6] = {
 		"No eternal reward will forgive us",
 		"now",
 		    "for",

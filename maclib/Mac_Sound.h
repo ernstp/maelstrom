@@ -115,7 +115,7 @@ public:
 		return(0);
 	}
 
-	char *Error(void) {
+	const char *Error(void) {
 		return(errstr);
 	}
 
@@ -195,7 +195,7 @@ printf("Freeing Wave id %hu at hash page %d/%d\n",(upper<<8)|lower,upper,lower);
 	}
 
 	/* Useful for getting error feedback */
-	void error(char *fmt, ...) {
+	void error(const char *fmt, ...) {
 		va_list ap;
 
 		va_start(ap, fmt);
@@ -203,6 +203,6 @@ printf("Freeing Wave id %hu at hash page %d/%d\n",(upper<<8)|lower,upper,lower);
 		va_end(ap);
 		errstr = errbuf;
 	}
-	char *errstr;
+	const char *errstr;
 	char  errbuf[BUFSIZ];
 };

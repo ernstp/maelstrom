@@ -100,17 +100,18 @@ void HaltNetData(void)
 	SDLNet_Quit();
 }
 
-int AddPlayer(char *playerstr)
+int AddPlayer(const char *playerstr)
 {
 	int playernum;
 	int portnum;
 	char *host=NULL, *port=NULL;
+	const char *tmp;
 
 	/* Extract host and port information */
-	if ( (port=strchr(playerstr, ':')) != NULL )
-		*(port++) = '\0';
-	if ( (host=strchr(playerstr, '@')) != NULL )
-		*(host++) = '\0';
+	if ( (tmp=strchr(playerstr, ':')) != NULL )
+		port = (char*)strndup(playerstr, tmp - playerstr);
+	if ( (tmp=strchr(playerstr, '@')) != NULL )
+		host = (char*)strndup(playerstr, tmp - playerstr);
 
 	/* Find out which player we are referring to */
 	if (((playernum = atoi(playerstr)) <= 0) || (playernum > MAX_PLAYERS)) {
@@ -127,6 +128,7 @@ int AddPlayer(char *playerstr)
 	}
 	if ( port ) {
 		portnum = atoi(port);
+		free(port);
 	} else {
 		portnum = NETPLAY_PORT+playernum;
 	}
@@ -137,6 +139,7 @@ int AddPlayer(char *playerstr)
 			error("Couldn't resolve host name for %s\r\n", host);
 			return(-1);
 		}
+		free(host);
 	} else { /* No host specified, local player */
 		if ( FoundUs ) {
 			error(
@@ -471,7 +474,7 @@ static inline void MakeNewPacket(int Wave, int Lives, int Turbo,
 }
 
 /* Flash an error up on the screen and pause for 3 seconds */
-static void ErrorMessage(char *message)
+static void ErrorMessage(const char *message)
 {
 	/* Display the error message */
 	Message(message);
@@ -503,7 +506,7 @@ static int AlertServer(int *Wave, int *Lives, int *Turbo)
 	Uint32 lives, seed;
 	int waiting;
 	int status;
-	char *message = NULL;
+	const char *message = NULL;
 
 	/* Our address server connection is through TCP */
 	Message("Connecting to Address Server");
