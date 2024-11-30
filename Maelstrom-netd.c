@@ -1,6 +1,7 @@
 
 /* Here we go... */
 
+#include <time.h>
 #include <stdio.h>
 #include <string.h>
 #include <signal.h>
@@ -184,7 +185,7 @@ void I_Crashed(int sig)
 	exit(sig);
 }
 
-main(int argc, char *argv[])
+void main(int argc, char *argv[])
 {
 	int netfd, i, slot;
 	struct sockaddr_in serv_addr;

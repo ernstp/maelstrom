@@ -12,7 +12,7 @@
 
 #define NUM_SCORES	10		// Copied from scores.cc 
 
-static TCPsocket Goto_ScoreServer(char *server, int port);
+static TCPsocket Goto_ScoreServer(const char *server, int port);
 static void Leave_ScoreServer(TCPsocket remote);
 
 /* This function actually registers the high scores */
@@ -23,6 +23,7 @@ void RegisterHighScore(Scores high)
 	unsigned char key[KEY_LEN];
 	unsigned int  keynums[KEY_LEN];
 	char netbuf[1024], *crc;
+	const char *crc_ret;
 
 	remote = Goto_ScoreServer(SCORE_HOST, SCORE_PORT);
 	if ( remote == NULL ) {
@@ -58,8 +59,8 @@ void RegisterHighScore(Scores high)
 	}
 
 	/* Send the scores */
-	crc = get_checksum(key, KEY_LEN);
-	snprintf(netbuf, sizeof(netbuf), SCOREFMT, crc, high.name, high.score, high.wave);
+	crc_ret = get_checksum(key, KEY_LEN);
+	snprintf(netbuf, sizeof(netbuf), SCOREFMT, crc_ret, high.name, high.score, high.wave);
 	SDLNet_TCP_Send(remote, netbuf, strlen(netbuf));
 	n = SDLNet_TCP_Recv(remote, netbuf, 1024);
 	if ( n > 0 ) {
@@ -177,7 +178,7 @@ int NetLoadScores(void)
 	return(0);
 }
 
-static TCPsocket Goto_ScoreServer(char *server, int port)
+static TCPsocket Goto_ScoreServer(const char *server, int port)
 {
 	TCPsocket remote;
 	IPaddress remote_address;
