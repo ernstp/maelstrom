@@ -1,3 +1,30 @@
+Maelstrom-Scores
+
+# Automake
+Makefile
+Makefile.in
+autom4te.cache
+/autoscan.log
+/autoscan-*.log
+/aclocal.m4
+/compile
+/config.cache
+/config.guess
+/config.h.in
+/config.log
+/config.status
+/config.sub
+/configure
+/configure.scan
+/depcomp
+/install-sh
+/missing
+/stamp-h1
+.deps/
+
+# VS Code
+.vscode*
+
 # Prerequisites
 *.d
 
