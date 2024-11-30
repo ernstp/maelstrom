@@ -84,7 +84,7 @@ static FILE *OpenData(const char *mode, char **fname)
 	if ( fname ) {
 		*fname = datafile;
 	}
-	snprintf(datafile, sizeof(datafile), "%s"DIR_SEP"%s", home, MAELSTROM_DATA);
+	snprintf(datafile, sizeof(datafile), "%s" DIR_SEP "%s", home, MAELSTROM_DATA);
 	if ( (data=fopen(datafile, mode)) == NULL )
 		return(NULL);
 	return(data);

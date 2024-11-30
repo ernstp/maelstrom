@@ -104,9 +104,9 @@ public:
 			delete[] path;
 		path = new char[strlen(directory)+1+strlen(filename)+1];
 		if ( strcmp(directory, DIR_SEP) == 0 ) {
-			sprintf(path, DIR_SEP"%s", filename);
+			sprintf(path, DIR_SEP "%s", filename);
 		} else {
-			sprintf(path, "%s"DIR_SEP"%s", directory, filename);
+			sprintf(path, "%s" DIR_SEP "%s", directory, filename);
 		}
 		return(path);
 	}
