@@ -9,8 +9,11 @@
 #include <sys/time.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
 /* We wait in a loop for players to connect and tell us how many people
    are playing.  Then, once all players have connected, then we broadcast
